@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<!-- <link rel="stylesheet" type="text/css" href="v2.css"> -->
+</head>
+<body>
+	<img src="die1.png" id="dice1">
+	<img src="die1.png" id="dice2">
+	<img src="die1.png" id="dice3">
+	<img src="die1.png" id="dice4">
+	<img src="die1.png" id="dice5">
+	<img src="die1.png" id="dice6">
+	<p><img src="die1.png" id="dice7">
+	<img src="die1.png" id="dice8">
+	<img src="die1.png" id="dice9">
+	<img src="die1.png" id="dice10">
+	<img src="die1.png" id="dice11">
+	<img src="die1.png" id="dice12"><br>
+
+	<input type="button" id="button" value="cast">
+
+	<div id="fTable">
+		<table  style="border: 2px orangered solid;" >
+			<thead style="color: lightcoral;">
+				<tr>
+					<th>Face</th>
+					<th>Frequency</th>
+					<th>Percent</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td id="one1">0</td>
+					<td id="one2"></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td id="two1">0</td>
+					<td id="two2"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td id="three1">0</td>
+					<td id="three2"></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td id="four1">0</td>
+					<td id="four2"></td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td id="five1">0</td>
+					<td id="five2"></td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td id="six1">0</td>
+					<td id="six2"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script >
+		let totalDice = 0;
+			let frequency1 =0;
+			let frequency2 =0;
+			let frequency3 =0;
+			let frequency4 =0;
+			let frequency5 =0;
+			let frequency6 =0;
+		function start(){
+			var btn = document.getElementById("button");
+			btn.addEventListener("click", roll);
+		}
+		function roll(){
+			let face;
+			for(i=1;i<=12;i++){
+				face = Math.floor(Math.random()*6 + 1);
+				setImg(i,face);
+				diceFrequency(face);
+				totalDice++;
+			}
+			updateTable();
+		}
+		function setImg(num, face){
+			var dieImg = document.getElementById("dice"+num);
+			dieImg.setAttribute("src", "die"+face+".png");
+			dieImg.setAttribute("alt", "die with"+face+"spot(S)");
+		}
+		function diceFrequency(face){
+			switch(face)
+			{
+				case 1:
+					frequency1++;
+					break;
+				case 2:
+					frequency2++;
+					break;
+				case 3:
+					frequency3++;
+					break;
+				case 4:
+					frequency4++;
+					break;
+				case 5:
+					frequency5++;
+					break;
+				case 6:
+					frequency6++;
+					break;
+			}
+		}
+		function updateTable(){
+			var newF1 = document.getElementById("one1");
+			var newP1 = document.getElementById("one2");
+			var newF2 = document.getElementById("two1");
+			var newP2 = document.getElementById("two2");
+			var newF3 = document.getElementById("three1");
+			var newP3 = document.getElementById("three2");
+			var newF4 = document.getElementById("four1");
+			var newP4 = document.getElementById("four2");
+			var newF5 = document.getElementById("five1");
+			var newP5 = document.getElementById("five2");
+			var newF6 = document.getElementById("six1");
+			var newP6 = document.getElementById("six2");
+
+			newF1.innerText = frequency1;
+			newP1.innerText = Math.floor((frequency1/totalDice)*100)+"%"
+			newF2.innerText = frequency2;
+			newP2.innerText = Math.floor((frequency2/totalDice)*100)+"%"
+			newF3.innerText = frequency3;
+			newP3.innerText = Math.floor((frequency3/totalDice)*100)+"%"
+			newF4.innerText = frequency4;
+			newP4.innerText = Math.floor((frequency4/totalDice)*100)+"%"
+			newF5.innerText = frequency5;
+			newP5.innerText = Math.floor((frequency5/totalDice)*100)+"%"
+			newF6.innerText = frequency6;
+			newP6.innerText = Math.floor((frequency6/totalDice)*100)+"%"
+
+
+			
+		}
+
+		window.addEventListener("load", start);
+	</script>
+</body>
+</html>
